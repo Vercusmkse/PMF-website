@@ -7,8 +7,21 @@ const cors = require('cors');
 const contactRoute = require('./routes/contact');
 const subscribeRoute = require('./routes/subscribe');
 
+
+
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const adminRoutes = require('./routes/admin');
+app.use('/admin', adminRoutes);
+
 
 // Middleware
 app.use(cors());
